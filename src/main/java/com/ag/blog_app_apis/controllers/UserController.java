@@ -40,8 +40,11 @@ public class UserController {
 
     //get aLll
     @GetMapping("/")
-    public ResponseEntity<UserResponse> getAllUsers(@RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber, @RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize) {
-        UserResponse allUsers = this.userService.getAllUsers(pageNumber, pageSize);
+    public ResponseEntity<UserResponse> getAllUsers(@RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
+                                                    @RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize,
+                                                    @RequestParam(value = "sortBy", defaultValue = "id", required = false) String sortBy,
+                                                    @RequestParam(value = "sortDir", defaultValue = "asc", required = false) String sortDir) {
+        UserResponse allUsers = this.userService.getAllUsers(pageNumber, pageSize, sortBy, sortDir);
         return new ResponseEntity<UserResponse>(allUsers, HttpStatus.OK);
     }
 

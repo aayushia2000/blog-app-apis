@@ -14,6 +14,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -63,8 +64,14 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostResponse getAllPosts(Integer pageNumber, Integer pageSize) {
-        PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
+    public PostResponse getAllPosts(Integer pageNumber, Integer pageSize, String sortBy, String sortDir) {
+        Sort sort = null;
+        if(sortDir.equalsIgnoreCase("asc")){
+            sort = Sort.by(sortBy).ascending();
+        }else{
+            sort = Sort.by(sortBy).descending();
+        }
+        PageRequest pageRequest = PageRequest.of(pageNumber, pageSize, sort);
         Page<Post> postPage = this.postRepo.findAll(pageRequest);
 //        List<Post> posts = this.postRepo.findAll();
         List<Post> posts = postPage.getContent();
@@ -102,7 +109,10 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostDTO> getPostByKeyword(String keyword) {
-        return List.of();
+    public List<PostDTO> getPostByTitleKeyword(String keyword) {
+        List<Post> posts = this.postRepo.findByTitleContaining(keyword);
+        List<PostDTO> postDTOList = posts.stream().map((post) -> this.modelMapper.map(post, PostDTO.class)).toList();
+        return postDTOList;
+
     }
 }
