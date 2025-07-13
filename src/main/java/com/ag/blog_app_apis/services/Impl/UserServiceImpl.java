@@ -3,10 +3,13 @@ package com.ag.blog_app_apis.services.Impl;
 import com.ag.blog_app_apis.entities.User;
 import com.ag.blog_app_apis.exceptions.ResourceNotFoundException;
 import com.ag.blog_app_apis.payloads.UserDTO;
+import com.ag.blog_app_apis.payloads.UserResponse;
 import com.ag.blog_app_apis.repositories.UserRepo;
 import com.ag.blog_app_apis.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,10 +50,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDTO> getAllUsers() {
-        List<User> userList = this.userRepo.findAll();
-        List<UserDTO> userDTOList = userList.stream().map(user -> this.userToDto(user)).collect(Collectors.toList());
-        return userDTOList;
+    public UserResponse getAllUsers(Integer pageNumber, Integer pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
+        Page<User> userPage = this.userRepo.findAll(pageRequest);
+//        List<User> userList = this.userRepo.findAll();
+        List<User> users = userPage.getContent();
+        List<UserDTO> userDTOS = users.stream().map((user) -> this.modelMapper.map(user, UserDTO.class)).toList();
+        UserResponse userResponse = new UserResponse();
+        userResponse.setContent(userDTOS);
+        userResponse.setPageNumber(userPage.getNumber());
+        userResponse.setPageSize(userPage.getSize());
+        userResponse.setTotalPages(userPage.getTotalPages());
+        userResponse.setTotalElements(userPage.getTotalElements());
+        userResponse.setLastpage(userPage.isLast());
+        return userResponse;
     }
 
     @Override

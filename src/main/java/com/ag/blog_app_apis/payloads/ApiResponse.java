@@ -1,8 +1,12 @@
 package com.ag.blog_app_apis.payloads;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
 @NoArgsConstructor
 public class ApiResponse {
     public String message;
@@ -13,7 +17,7 @@ public class ApiResponse {
         this.status = status;
     }
 
-    public String getMessage() {
+    /*public String getMessage() {
         return message;
     }
 
@@ -27,5 +31,5 @@ public class ApiResponse {
 
     public void setStatus(boolean status) {
         this.status = status;
-    }
+    }*/
 }

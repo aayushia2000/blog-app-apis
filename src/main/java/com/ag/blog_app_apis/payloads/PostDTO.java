@@ -4,9 +4,15 @@ import com.ag.blog_app_apis.entities.Category;
 import com.ag.blog_app_apis.entities.User;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class PostDTO {
 //    private Integer postId;
     private Integer postId;
@@ -22,7 +28,7 @@ public class PostDTO {
 //    @JoinColumn(name = "user_id")
     private User user;
 
-    public PostDTO() {
+    /*public PostDTO() {
     }
 
     public Integer getPostId() {
@@ -78,5 +84,5 @@ public class PostDTO {
 
     public void setUser(User user) {
         this.user = user;
-    }
+    }*/
 }

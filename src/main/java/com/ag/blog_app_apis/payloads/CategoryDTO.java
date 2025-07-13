@@ -3,7 +3,13 @@ package com.ag.blog_app_apis.payloads;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class CategoryDTO {
     private Integer categoryID;
     @NotEmpty
@@ -13,7 +19,7 @@ public class CategoryDTO {
     @Size(min = 15)
     private String categoryDescription;
 
-    public Integer getCategoryID() {
+    /*public Integer getCategoryID() {
         return categoryID;
     }
 
@@ -38,5 +44,5 @@ public class CategoryDTO {
     }
 
     public CategoryDTO() {
-    }
+    }*/
 }

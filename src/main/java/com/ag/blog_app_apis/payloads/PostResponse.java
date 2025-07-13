@@ -1,7 +1,14 @@
 package com.ag.blog_app_apis.payloads;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.List;
 
+@NoArgsConstructor
+@Setter
+@Getter
 public class PostResponse {
     private List<PostDTO> content;
     private int pageNumber;
@@ -10,7 +17,7 @@ public class PostResponse {
     private int totalPages;
     private boolean lastpage;
 
-    public PostResponse() {
+    /*public PostResponse() {
     }
 
     public List<PostDTO> getContent() {
@@ -59,5 +66,5 @@ public class PostResponse {
 
     public void setLastpage(boolean lastpage) {
         this.lastpage = lastpage;
-    }
+    }*/
 }

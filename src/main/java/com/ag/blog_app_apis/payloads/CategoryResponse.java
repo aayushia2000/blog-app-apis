@@ -5,12 +5,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserResponse {
-    private List<UserDTO> content;
+public class CategoryResponse {
+    private List<CategoryDTO> content;
     private int pageNumber;
     private int pageSize;
     private long totalElements;
