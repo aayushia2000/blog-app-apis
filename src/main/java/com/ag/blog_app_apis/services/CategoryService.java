@@ -1,6 +1,7 @@
 package com.ag.blog_app_apis.services;
 
 import com.ag.blog_app_apis.payloads.CategoryDTO;
+import com.ag.blog_app_apis.payloads.CategoryResponse;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface CategoryService {
     //update
     CategoryDTO updateCategory(CategoryDTO categoryDTO, Integer categoryId);
     //getAllCategory
-    List<CategoryDTO> getAllCategories();
+    CategoryResponse getAllCategories(Integer pageNumber, Integer pageSize);
     //getCategoryById
     CategoryDTO getCategoryById(Integer categoryId);
     //deleteCategory

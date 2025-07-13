@@ -4,7 +4,8 @@ import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+@Setter
+@Getter
 @NoArgsConstructor
 public class UserDTO {
     private int id;
@@ -19,7 +20,7 @@ public class UserDTO {
     @NotEmpty
     private String about;
 
-    public int getId() {
+    /*public int getId() {
         return id;
     }
 
@@ -57,5 +58,5 @@ public class UserDTO {
 
     public void setAbout(String about) {
         this.about = about;
-    }
+    }*/
 }

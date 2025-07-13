@@ -3,10 +3,13 @@ package com.ag.blog_app_apis.services.Impl;
 import com.ag.blog_app_apis.entities.Category;
 import com.ag.blog_app_apis.exceptions.ResourceNotFoundException;
 import com.ag.blog_app_apis.payloads.CategoryDTO;
+import com.ag.blog_app_apis.payloads.CategoryResponse;
 import com.ag.blog_app_apis.repositories.CategoryRepo;
 import com.ag.blog_app_apis.services.CategoryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,10 +41,19 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryDTO> getAllCategories() {
-        List<Category> categoryList = this.categoryRepo.findAll();
-        List<CategoryDTO> categoryDTOS = categoryList.stream().map((cat) -> this.modelMapper.map(cat, CategoryDTO.class)).toList();
-        return categoryDTOS;
+    public CategoryResponse getAllCategories(Integer pageNumber, Integer pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
+        Page<Category> categoryPage = this.categoryRepo.findAll(pageRequest);
+        List<Category> categories = categoryPage.getContent();
+        List<CategoryDTO> categoryDTOS = categories.stream().map((cat) -> this.modelMapper.map(cat, CategoryDTO.class)).toList();
+        CategoryResponse categoryResponse = new CategoryResponse();
+        categoryResponse.setContent(categoryDTOS);
+        categoryResponse.setPageNumber(categoryPage.getNumber());
+        categoryResponse.setPageSize(categoryPage.getSize());
+        categoryResponse.setTotalPages(categoryPage.getTotalPages());
+        categoryResponse.setTotalElements(categoryPage.getTotalElements());
+        categoryResponse.setLastpage(categoryPage.isLast());
+        return categoryResponse;
     }
 
     @Override
