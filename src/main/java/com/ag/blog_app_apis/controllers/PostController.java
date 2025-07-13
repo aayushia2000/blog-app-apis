@@ -40,9 +40,12 @@ public class PostController {
 
     //get all posts
     @GetMapping("/posts")
-    public ResponseEntity<PostResponse> getAllPosts(@RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber, @RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize){
+    public ResponseEntity<PostResponse> getAllPosts(@RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
+                                                    @RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize,
+                                                    @RequestParam(value = "sortBy", defaultValue = "postId", required = false) String sortBy,
+                                                    @RequestParam(value = "sortDir", defaultValue = "asc", required = false) String sortDir){
 //        List<PostDTO> allPosts = this.postService.getAllPosts(pageNumber, pageSize);
-        PostResponse allPostsPostResponse = this.postService.getAllPosts(pageNumber, pageSize);
+        PostResponse allPostsPostResponse = this.postService.getAllPosts(pageNumber, pageSize, sortBy, sortDir);
         return new ResponseEntity<PostResponse>(allPostsPostResponse, HttpStatus.OK);
     }
 
@@ -64,5 +67,12 @@ public class PostController {
     public ApiResponse deletePost(@PathVariable Integer postId){
         this.postService.deletePost(postId);
         return new ApiResponse("Post is successfully deleted", true);
+    }
+
+    //search Posts by title keyword
+    @GetMapping("/posts/search/{keyword}")
+    public ResponseEntity<List<PostDTO>> searchPosts(@PathVariable("keyword") String keyw){
+        List<PostDTO> results = this.postService.getPostByTitleKeyword(keyw);
+        return new ResponseEntity<List<PostDTO>>(results, HttpStatus.OK);
     }
 }

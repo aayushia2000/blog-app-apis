@@ -9,7 +9,7 @@ public interface UserService {
     UserDTO createUser(UserDTO userDTO);
     UserDTO updateUser(UserDTO userDTO, Integer userId);
     UserDTO getUserById(Integer userId);
-    UserResponse getAllUsers(Integer pageNumber, Integer pageSize);
+    UserResponse getAllUsers(Integer pageNumber, Integer pageSize, String sortBy, String sortDir);
     void deleteUser(Integer userId);
 
 }

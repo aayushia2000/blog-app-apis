@@ -11,7 +11,7 @@ public interface CategoryService {
     //update
     CategoryDTO updateCategory(CategoryDTO categoryDTO, Integer categoryId);
     //getAllCategory
-    CategoryResponse getAllCategories(Integer pageNumber, Integer pageSize);
+    CategoryResponse getAllCategories(Integer pageNumber, Integer pageSize, String sortBy, String sortDir);
     //getCategoryById
     CategoryDTO getCategoryById(Integer categoryId);
     //deleteCategory

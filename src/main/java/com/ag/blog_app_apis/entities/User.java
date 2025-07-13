@@ -7,11 +7,11 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-@Getter
-@Setter
+//@Getter
+//@Setter
 @Entity
 @Table(name = "users")
-@NoArgsConstructor
+//@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,7 +25,7 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Post> posts = new ArrayList<>();
 
-/*    public int getId() {
+    public int getId() {
         return id;
     }
 
@@ -63,5 +63,5 @@ public class User {
 
     public void setAbout(String about) {
         this.about = about;
-    }*/
+    }
 }
