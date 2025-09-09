@@ -1,6 +1,7 @@
 package com.ag.blog_app_apis.payloads;
 
 import com.ag.blog_app_apis.entities.Category;
+import com.ag.blog_app_apis.entities.Comment;
 import com.ag.blog_app_apis.entities.User;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -9,6 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -27,6 +30,8 @@ public class PostDTO {
 //    @ManyToOne
 //    @JoinColumn(name = "user_id")
     private User user;
+
+    private Set<CommentDTO> comments = new HashSet<>();
 
     /*public PostDTO() {
     }
